@@ -27,6 +27,7 @@ public class Time implements ITime {
      * @param h 0≤h≤23
      * @param min 0≤m≤59
      */
+
     public Time(int y, int m, int d, int h, int min) {
         if (m < 1 || m > 12) {
             throw new IllegalArgumentException("month must be within 1..12");
