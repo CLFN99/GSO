@@ -1,43 +1,46 @@
 package fontys.tests;
 
+
+import org.junit.jupiter.api.*;
+
 class TimeTest {
-    @org.junit.jupiter.api.BeforeEach
+    @BeforeEach
     void setUp() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getDayInWeek() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getYear() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getMonth() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getDay() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getHours() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getMinutes() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void plus() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void compareTo() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void difference() {
     }
 
