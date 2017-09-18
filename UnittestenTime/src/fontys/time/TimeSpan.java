@@ -23,8 +23,8 @@ public class TimeSpan implements ITimeSpan {
     
     /**
      * 
-     * @param bt must be earlier than et
-     * @param et 
+     * @param bt BeginTime must be earlier than et
+     * @param et EndTime
      */
     public TimeSpan(ITime bt, ITime et) {
         if (bt.compareTo(et) <= 0) {
