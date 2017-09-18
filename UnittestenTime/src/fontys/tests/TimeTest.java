@@ -1,4 +1,4 @@
-package fontys.time;
+package fontys.tests;
 
 class TimeTest {
     @org.junit.jupiter.api.BeforeEach
