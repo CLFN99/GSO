@@ -22,14 +22,14 @@ public class Time implements ITime {
      * minutes m; if the combination of y-m-d refers to a non-existing date 
      * the value of this Time-object will be not guaranteed 
      * @param y 
-     * @param m 1≤m≤12
+     * @param m 0≤m≤11
      * @param d 1≤d≤31
      * @param h 0≤h≤23
      * @param min 0≤m≤59
      */
 
     public Time(int y, int m, int d, int h, int min) {
-        if (m < 1 || m > 12) {
+        if (m < 0 || m > 11) {
             throw new IllegalArgumentException("month must be within 1..12");
         }
         if (d < 1 || d > 31) {
@@ -41,8 +41,9 @@ public class Time implements ITime {
         if (m < 0 || m > 59) {
             throw new IllegalArgumentException("minutes must be within 0..59");
         }
-        
+
         gc = new GregorianCalendar(y, m , d, h, min);
+        gc.setFirstDayOfWeek(GregorianCalendar.SUNDAY);
     }
 
     Time(Time t) {
@@ -51,21 +52,22 @@ public class Time implements ITime {
 
     @Override
     public DayInWeek getDayInWeek() {
-        int day_of_week = gc.get(GregorianCalendar.DAY_OF_WEEK);
+        int day_of_week = gc.get(GregorianCalendar.DAY_OF_WEEK) ;
+        gc.getFirstDayOfWeek();
         switch (day_of_week) {
-            case GregorianCalendar.SUNDAY:
+            case 1:
                 return DayInWeek.SUN;
-            case GregorianCalendar.MONDAY:
+            case 2:
                 return DayInWeek.MON;
-            case GregorianCalendar.TUESDAY:
+            case 3:
                 return DayInWeek.TUE;
-            case GregorianCalendar.WEDNESDAY:
+            case 4:
                 return DayInWeek.WED;
-            case GregorianCalendar.THURSDAY:
+            case 5:
                 return DayInWeek.THU;
-            case GregorianCalendar.FRIDAY:
+            case 6:
                 return DayInWeek.FRI;
-            case GregorianCalendar.SATURDAY:
+            case 7:
                 return DayInWeek.SAT;
             default:
                 return null;
@@ -79,7 +81,7 @@ public class Time implements ITime {
 
     @Override
     public int getMonth() {
-        return gc.get(GregorianCalendar.MONTH) + 1;
+        return gc.get(GregorianCalendar.MONTH) ;
     }
 
     @Override
@@ -98,7 +100,7 @@ public class Time implements ITime {
     }
 
     @Override
-    public ITime plus(int minutes) {
+    public Time plus(int minutes) {
         Time time = new Time(this);
         time.gc.add(GregorianCalendar.MINUTE, minutes);
         return time;
@@ -107,12 +109,12 @@ public class Time implements ITime {
     @Override
     public int compareTo(ITime t) {
         Time time = (Time) t;
-        return time.gc.compareTo(gc);
+        return gc.compareTo(time.gc);
     }
 
     @Override
     public int difference(ITime time) {
         Time t = (Time) time;
-        return (int) ((this.gc.getTimeInMillis() - t.gc.getTimeInMillis()) / 600000);
+        return (int) (((t.gc.getTimeInMillis() - this.gc.getTimeInMillis() / 1000) / 60 ));
     }
 }

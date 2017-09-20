@@ -49,7 +49,7 @@ public interface ITime extends Comparable<ITime> {
      * @param minutes (a negative value is allowed)
      * @return  this time plus minutes
      */
-    ITime plus(int minutes);
+    Time plus(int minutes);
     
     /**
      * 

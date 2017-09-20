@@ -35,9 +35,8 @@ public class Appointment implements Iterator<Contact> {
         return timeSpan;
     }
 
-    public Iterator<Contact> invitees() {
-
-    }
+//    public Iterator<Contact> invitees() {
+//    }
 
 
     /**
@@ -47,6 +46,7 @@ public class Appointment implements Iterator<Contact> {
      *
      * @return {@code true} if the iteration has more elements
      */
+
     @Override
     public boolean hasNext() {
         return false;
