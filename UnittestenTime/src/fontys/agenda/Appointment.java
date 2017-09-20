@@ -35,8 +35,14 @@ public class Appointment implements Iterator<Contact> {
         return timeSpan;
     }
 
+<<<<<<< HEAD
 //    public Iterator<Contact> invitees() {
 //    }
+=======
+    /*public Iterator<Contact> invitees() {
+
+    }*/
+>>>>>>> 3a4180f4c5be995bdb02375f159e29de3ae64bad
 
 
     /**
