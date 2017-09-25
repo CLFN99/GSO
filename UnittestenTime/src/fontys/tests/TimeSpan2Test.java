@@ -30,6 +30,7 @@ class TimeSpan2Test {
         Time beginTime = new Time(2017, 9, 18, 12, 0);
         Time endTime = new Time(2017, 9, 18, 12, 30);
         TimeSpan2 ts = new TimeSpan2(beginTime, endTime);
+        assertEquals(endTime.getMinutes(), ts.getEndTime().getMinutes());
         assertEquals(endTime.getHours(), ts.getEndTime().getHours());
     }
 
