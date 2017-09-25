@@ -20,11 +20,13 @@ public class Appointment implements Iterator<Contact> {
 
     public boolean addContact(Contact c) {
         contacts.add(c);
+        c.addAppointment(this);
         return true;
     }
 
     public void removeContact(Contact c) {
         contacts.remove(c);
+        c.removeAppointment(this);
     }
 
     public String getSubject() {

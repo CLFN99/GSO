@@ -1,4 +1,5 @@
 package fontys.tests;
+import fontys.agenda.Contact;
 import fontys.time.DayInWeek;
 import fontys.time.Time;
 import org.junit.jupiter.api.Assertions;
@@ -25,6 +26,7 @@ class TimeTest {
         assertEquals(2, t.getDay());
         assertEquals(3, t.getHours());
         assertEquals(45, t.getMinutes());
+
     }
     @Test
     void testMonth(){
