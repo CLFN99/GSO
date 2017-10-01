@@ -17,6 +17,7 @@ public class Contact {
 
     /**
      * creation of a Contact object with name
+     * @param name  Name of the contact
      */
 
     public Contact(String name){
@@ -31,6 +32,7 @@ public class Contact {
 
     /**
      * Adds an appointment to this contact's agenda
+     * @param a Appointment to be added to the list
      * @return {@code true} when there is no overlap
      * @return {@code false} when there is overlap between appointments of this contact
      */
@@ -50,6 +52,7 @@ public class Contact {
 
     /**
      * Removes appointment from contact's agenda
+     * @param a Appointment to remove from the agenda
      */
     protected void removeAppointment(Appointment a){
         this.agenda.remove(a);
