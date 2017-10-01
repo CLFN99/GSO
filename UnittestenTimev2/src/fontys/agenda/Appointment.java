@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ *
+ * @author Célina Ngapy
+ *
+ */
 public class Appointment implements Iterator<Contact> {
     private String subject;
     private ITimeSpan timeSpan;

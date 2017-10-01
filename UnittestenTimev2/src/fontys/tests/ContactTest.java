@@ -13,7 +13,6 @@ class ContactTest {
         assertEquals("Maria Jones", c.getName());
     }
 
-
     @Test
     void testAppointments() {
     }
