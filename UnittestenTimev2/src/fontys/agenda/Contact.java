@@ -37,22 +37,28 @@ public class Contact {
      * @return {@code false} when there is overlap between appointments of this contact
      */
     protected boolean addAppointment(Appointment a){
+        boolean intersect = false;
         if (agenda.isEmpty()){
             this.agenda.add(a);
             return true;
         }
         else {
-            if(agenda.isEmpty()){
+
+
+            //if(agenda.isEmpty()){
                 for (Appointment appt : this.agenda) {
-                    if(a.getTimeSpan().intersectionWith(a.getTimeSpan()) != null){
-                        //they don't intersect
-                        this.agenda.add(a);
-                        return true;
+                    if(appt.getTimeSpan().intersectionWith(a.getTimeSpan()) != null){
+                        //they  intersect
+                        intersect = true;
                     }
                 }
-            }
+            //}
         }
-        return false;
+        if (intersect){
+            return  false;
+        }
+        this.agenda.add(a);
+        return true;
     }
 
     /**

@@ -123,34 +123,35 @@ public class TimeSpan implements ITimeSpan {
 
         if(compareBegin == 0 || compareBegin > 0 && compareBeginToEnd < 0 ){
             // the beginTime is the same or the begintime is after begintime this and before endtime this
-            //they don't intersect
-            return null;
-        }
+            //they intersect
+            ITime begintime = null, endtime = null;
 
-        ITime begintime = null, endtime = null;
+            //determine begintime
+            if (timeSpan.getBeginTime().compareTo(bt) < 0 ) {
+                begintime = bt;
+            }
+            else if (timeSpan.getBeginTime().compareTo(bt) == 0){
+                begintime = bt;
+            }
+            else if (timeSpan.getBeginTime().compareTo(bt) > 0){
+                begintime = timeSpan.getBeginTime();
+            }
 
-        //determine begintime
-        if (timeSpan.getBeginTime().compareTo(bt) < 0 ) {
-            begintime = bt;
-        }
-        else if (timeSpan.getBeginTime().compareTo(bt) == 0){
-            begintime = bt;
-        }
-        else if (timeSpan.getBeginTime().compareTo(bt) > 0){
-            begintime = timeSpan.getBeginTime();
-        }
+            //determine endtime
+            if(timeSpan.getEndTime().compareTo(et) > 0){
+                endtime = et;
+            }
+            else if (timeSpan.getEndTime().compareTo(et) < 0){
+                endtime = timeSpan.getEndTime();
+            }
+            else if (timeSpan.getEndTime().compareTo(et) == 0){
+                endtime = et;
+            }
 
-        //determine endtime
-        if(timeSpan.getEndTime().compareTo(et) > 0){
-            endtime = et;
-        }
-        else if (timeSpan.getEndTime().compareTo(et) < 0){
-            endtime = timeSpan.getEndTime();
-        }
-        else if (timeSpan.getEndTime().compareTo(et) == 0){
-            endtime = et;
-        }
+            return new TimeSpan(begintime, endtime);
 
-        return new TimeSpan(begintime, endtime);
+        }
+        return null;
+
     }
 }

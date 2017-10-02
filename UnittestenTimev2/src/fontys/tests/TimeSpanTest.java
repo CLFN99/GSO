@@ -1,5 +1,6 @@
 package fontys.tests;
 
+import fontys.time.ITimeSpan;
 import fontys.time.Time;
 import fontys.time.TimeSpan;
 import org.junit.jupiter.api.Assertions;
@@ -109,5 +110,23 @@ class TimeSpanTest {
 
     @Test
     void intersectionWith() {
+        TimeSpan t1 = new TimeSpan(
+                new Time(2017, 9, 18, 12, 0),
+                new Time(2017, 9, 18, 15, 30));
+        TimeSpan t2 = new TimeSpan(
+                new Time(2017,9,18,13,0),
+                new Time (2017,9,18,16,0)
+        );
+        TimeSpan t = (TimeSpan)t1.intersectionWith(t2);
+        TimeSpan intersection = new TimeSpan(
+                new Time (2017,9,18,13,0),
+                new Time(2017,9,18,15,30)
+        );
+
+        assertEquals(intersection.getBeginTime().getHours(), t.getBeginTime().getHours());
+        assertEquals(intersection.getEndTime().getHours(), t.getEndTime().getHours());
+        assertEquals(intersection.getBeginTime().getMinutes(), t.getBeginTime().getMinutes());
+        assertEquals(intersection.getEndTime().getMinutes(), t.getEndTime().getMinutes());
+
     }
 }
