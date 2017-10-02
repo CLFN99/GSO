@@ -59,10 +59,11 @@ public class Contact {
     }
 
     /**
-     * Iterates through appointments (? not sure)
+     *
+     * @return Agenda iterator
      */
     public Iterator<Appointment> appointments(){
-        return null;
+        return agenda.iterator();
     }
 
 }

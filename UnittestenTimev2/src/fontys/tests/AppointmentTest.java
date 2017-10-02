@@ -32,7 +32,7 @@ public class AppointmentTest {
                         new Time(2017, 9, 18, 12, 30)
                 ));
         Contact contact = new Contact("Maria Jones");
-        assertEquals(true, appointment.addContact(contact), "Message");
+        assertEquals(true, appointment.addContact(contact), "AddContact failed");
     }
 
     @Test

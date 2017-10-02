@@ -66,6 +66,10 @@ public class Appointment {
         return timeSpan;
     }
 
+    /**
+     * Returns the iterator of contacts
+     * @return the iterator of contacts
+     */
     public Iterator<Contact> invitees() {
         return contacts.iterator();
     }
