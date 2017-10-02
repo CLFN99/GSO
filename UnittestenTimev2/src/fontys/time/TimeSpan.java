@@ -118,21 +118,37 @@ public class TimeSpan implements ITimeSpan {
     @Override
     public ITimeSpan intersectionWith(ITimeSpan timeSpan) {
 
-        ITime begintime, endtime;
-        if (bt.compareTo(timeSpan.getBeginTime()) > 0) {
+        int compareBegin = timeSpan.getBeginTime().compareTo(this.getBeginTime());
+        int compareBeginToEnd = timeSpan.getBeginTime().compareTo(this.getEndTime());
+
+        if(compareBegin == 0 || compareBegin > 0 && compareBeginToEnd < 0 ){
+            // the beginTime is the same or the begintime is after begintime this and before endtime this
+            //they don't intersect
+            return null;
+        }
+
+        ITime begintime = null, endtime = null;
+
+        //determine begintime
+        if (timeSpan.getBeginTime().compareTo(bt) < 0 ) {
             begintime = bt;
-        } else {
+        }
+        else if (timeSpan.getBeginTime().compareTo(bt) == 0){
+            begintime = bt;
+        }
+        else if (timeSpan.getBeginTime().compareTo(bt) > 0){
             begintime = timeSpan.getBeginTime();
         }
 
-        if (et.compareTo(timeSpan.getEndTime()) < 0) {
+        //determine endtime
+        if(timeSpan.getEndTime().compareTo(et) > 0){
             endtime = et;
-        } else {
+        }
+        else if (timeSpan.getEndTime().compareTo(et) < 0){
             endtime = timeSpan.getEndTime();
         }
-
-        if (begintime.compareTo(endtime) >= 0) {
-            return null;
+        else if (timeSpan.getEndTime().compareTo(et) == 0){
+            endtime = et;
         }
 
         return new TimeSpan(begintime, endtime);

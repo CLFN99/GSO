@@ -37,14 +37,19 @@ public class Contact {
      * @return {@code false} when there is overlap between appointments of this contact
      */
     protected boolean addAppointment(Appointment a){
-        for (Appointment appt : this.agenda) {
-            // appt: 1-5 a: 2-3
-            // or begintime a is after begintime appt and before endtime appt
-            int compareBegin = a.getTimeSpan().getBeginTime().compareTo(appt.getTimeSpan().getBeginTime());
-            int compareBeginToEnd = a.getTimeSpan().getBeginTime().compareTo(appt.getTimeSpan().getEndTime());
-
-            if(compareBegin == 1 || compareBegin == 0 && compareBeginToEnd == -1){
-                return true;
+        if (agenda.isEmpty()){
+            this.agenda.add(a);
+            return true;
+        }
+        else {
+            if(agenda.isEmpty()){
+                for (Appointment appt : this.agenda) {
+                    if(a.getTimeSpan().intersectionWith(a.getTimeSpan()) != null){
+                        //they don't intersect
+                        this.agenda.add(a);
+                        return true;
+                    }
+                }
             }
         }
         return false;
