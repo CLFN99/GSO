@@ -2,6 +2,7 @@ package fontys.agenda;
 
 import fontys.time.ITimeSpan;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  *
  */
 
-public class Appointment implements Iterator<Contact> {
+public class Appointment {
     private String subject;
     private ITimeSpan timeSpan;
     private List<Contact> contacts;
@@ -57,37 +58,15 @@ public class Appointment implements Iterator<Contact> {
         return subject;
     }
 
+    /**
+     * Returns the timespan of the appointment
+     * @return Timespan object
+     */
     public ITimeSpan getTimeSpan() {
         return timeSpan;
     }
 
-    /*public Iterator<Contact> invitees() {
-
-    }*/
-
-
-
-    /**
-     * Returns {@code true} if the iteration has more elements.
-     * (In other words, returns {@code true} if {@link #next} would
-     * return an element rather than throwing an exception.)
-     *
-     * @return {@code true} if the iteration has more elements
-     */
-
-    @Override
-    public boolean hasNext() {
-        return false;
-    }
-
-    /**
-     * Returns the next element in the iteration.
-     *
-     * @return the next element in the iteration
-     * @throws NoSuchElementException if the iteration has no more elements
-     */
-    @Override
-    public Contact next() {
-        return null;
+    public Iterator<Contact> invitees() {
+        return contacts.iterator();
     }
 }
