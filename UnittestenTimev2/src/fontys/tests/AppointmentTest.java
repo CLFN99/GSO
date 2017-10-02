@@ -17,11 +17,16 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AppointmentTest {
     @Test
     public void TestConstructor() {
+        TimeSpan ts = new TimeSpan(
+                new Time(2017, 9, 18, 12, 0),
+                new Time(2017, 9, 18, 12, 30)
+        );
+
         Appointment appointment = new Appointment("TestSubject",
-                new TimeSpan(
-                        new Time(2017, 9, 18, 12, 0),
-                        new Time(2017, 9, 18, 12, 30)
-                ));
+                ts
+        );
+
+        assertEquals(appointment.getTimeSpan(), ts, "Either the constructor doesn't assign the timespan value correctly, or the getTimeSpan failed");
     }
 
     @Test
@@ -45,6 +50,8 @@ public class AppointmentTest {
         Contact contact = new Contact("Maria Jones");
         appointment.addContact(contact);
         appointment.removeContact(contact);
+        Iterator<Contact> iterator = appointment.invitees();
+        assertEquals(iterator.hasNext(), false, "Iterator found next");
     }
 
     @Test
