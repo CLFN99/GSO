@@ -63,9 +63,11 @@ public class AEXBanner extends Application {
                         String stock1 =  stock.getName() + ": " + df.format(stock.getRate());
                         stockString = stockString + " " + stock1;
                     }
-//
-                    setStock(stockString);
-                    System.out.printf("Text width: %s; Text X: %s%n", text.getLayoutBounds().getWidth(), text.getLayoutX());
+                    for(int i = 0; i < 100; i++){
+                        setStock(stockString + " " + stockString);
+                    }
+
+                    //System.out.printf("Text width: %s; Text X: %s%n", text.getLayoutBounds().getWidth(), text.getLayoutX());
                     if (-text.getLayoutX() < text.getLayoutBounds().getWidth()) { //Minus text.getLayoutX() to account for the negative x number (when scrolling to the left)
                         text.relocate(text.getLayoutX() - 2, 0);
                     } else {
@@ -86,13 +88,6 @@ public class AEXBanner extends Application {
 
     public void setStocks(List<IStock> stocks){
         this.stocks = stocks;
-//        DecimalFormat df = new DecimalFormat(".##");
-//        String stockString = "";
-//        for (IStock stock: stocks) {
-//            String stock1 =  stock.getName() + ": " + df.format(stock.getRate());
-//            stockString = stockString + " " + stock1;
-//            setStock(stockString + stockString);
-//        }
     }
 
     public void setStock(String stock) {
