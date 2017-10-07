@@ -56,7 +56,7 @@ public class AEXBanner extends Application {
                 long lag = now - prevUpdate;
                 if (lag >= NANO_TICKS) {
                     // calculate new location of text
-                    
+
                     DecimalFormat df = new DecimalFormat(".##");
                     String stockString = "";
                     for (IStock stock: stocks) {
