@@ -57,7 +57,7 @@ public class AEXBanner extends Application {
                 if (lag >= NANO_TICKS) {
                     // calculate new location of text
 
-                    DecimalFormat df = new DecimalFormat(".##");
+                    DecimalFormat df = new DecimalFormat("000.00");
                     String stockString = "";
                     for (IStock stock: stocks) {
                         String stock1 =  stock.getName() + ": " + df.format(stock.getRate());
@@ -65,7 +65,12 @@ public class AEXBanner extends Application {
                     }
 //
                     setStock(stockString);
-                    text.relocate(text.getLayoutX() - 2, 0);
+                    System.out.printf("Text width: %s; Text X: %s%n", text.getLayoutBounds().getWidth(), text.getLayoutX());
+                    if (-text.getLayoutX() < text.getLayoutBounds().getWidth()) { //Minus text.getLayoutX() to account for the negative x number (when scrolling to the left)
+                        text.relocate(text.getLayoutX() - 2, 0);
+                    } else {
+                        text.relocate(0, 0);
+                    }
                     prevUpdate = now;
                 }
             }

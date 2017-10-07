@@ -4,6 +4,7 @@ import aex.IStock;
 import aex.Stock;
 import aex.StockExchange.MockStockExchange;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
@@ -26,6 +27,6 @@ public class GenerateStocks extends TimerTask {
         stocks.add(new Stock("Shell", ThreadLocalRandom.current().nextDouble(min, max)));
         stocks.add(new Stock("Google", ThreadLocalRandom.current().nextDouble(min, max)));
         mock.setStock(stocks);
-        System.out.print("Task" + stocks.size() + "\n");
+        System.out.print("Task " + stocks.size() + "\n");
     }
 }

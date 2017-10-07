@@ -7,4 +7,5 @@ import java.util.Timer;
 public interface IStockExchange {
     List<IStock> getStock();
     void setStock(List<IStock> stocks);
+    void stopTimer();
 }

@@ -33,5 +33,7 @@ public class BannerController {
     public void stop() {
         // Stop simulation timer
         pollingTimer.cancel();
+
+        stockExchange.stopTimer();
     }
 }

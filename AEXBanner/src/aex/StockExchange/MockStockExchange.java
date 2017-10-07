@@ -28,6 +28,10 @@ public class MockStockExchange implements IStockExchange {
 
     public void setStock(List<IStock> stocks){
         this.stocks = stocks;
-        System.out.print("Set mock" + stocks.size() + "\n");
+        System.out.print("Set mock " + stocks.size() + "\n");
+    }
+
+    public void stopTimer() {
+        timer.cancel();
     }
 }
