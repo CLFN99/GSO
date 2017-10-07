@@ -1,5 +1,6 @@
 package aex.client;
 
+import aex.IStock;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -9,6 +10,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.text.DecimalFormat;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+
 public class AEXBanner extends Application {
 
     public static final int WIDTH = 1000;
@@ -16,6 +21,7 @@ public class AEXBanner extends Application {
     public static final int NANO_TICKS = 20000000;
     // FRAME_RATE = 1000000000/NANO_TICKS = 50;
 
+    private List<IStock> stocks;
     private Text text;
     private double textLength;
     private double textPosition;
@@ -24,10 +30,9 @@ public class AEXBanner extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
         controller = new BannerController(this);
 
-        Font font = new Font("Arial", HEIGHT);
+        Font font = new Font("Arial", HEIGHT - 10);
         text = new Text();
         text.setFont(font);
         text.setFill(Color.BLACK);
@@ -51,31 +56,48 @@ public class AEXBanner extends Application {
                 long lag = now - prevUpdate;
                 if (lag >= NANO_TICKS) {
                     // calculate new location of text
-                    // TODO
-                    text.relocate(textPosition,0);
+                    
+                    DecimalFormat df = new DecimalFormat(".##");
+                    String stockString = "";
+                    for (IStock stock: stocks) {
+                        String stock1 =  stock.getName() + ": " + df.format(stock.getRate());
+                        stockString = stockString + " " + stock1;
+                    }
+//
+                    setStock(stockString);
+                    text.relocate(text.getLayoutX() - 2, 0);
                     prevUpdate = now;
                 }
             }
             @Override
             public void start() {
                 prevUpdate = System.nanoTime();
-                textPosition = WIDTH;
-                text.relocate(textPosition, 0);
-                setStock("Nothing to display");
+                textPosition = 0;
                 super.start();
             }
         };
         animationTimer.start();
     }
 
+    public void setStocks(List<IStock> stocks){
+        this.stocks = stocks;
+//        DecimalFormat df = new DecimalFormat(".##");
+//        String stockString = "";
+//        for (IStock stock: stocks) {
+//            String stock1 =  stock.getName() + ": " + df.format(stock.getRate());
+//            stockString = stockString + " " + stock1;
+//            setStock(stockString + stockString);
+//        }
+    }
+
     public void setStock(String stock) {
-        text.setText(stock);
-        textLength = text.getLayoutBounds().getWidth();
+        text.setText(stock + " " );
+        textLength = WIDTH;
     }
 
     @Override
     public void stop() {
-        animationTimer.stop();
         controller.stop();
+        animationTimer.stop();
     }
 }
