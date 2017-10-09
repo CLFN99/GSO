@@ -1,6 +1,7 @@
 package aex.client;
 
-import aex.IStock;
+import aex.Stock.IStock;
+import aex.server.StockExchange.IStockExchange;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -12,7 +13,6 @@ import javafx.stage.Stage;
 
 import java.text.DecimalFormat;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class AEXBanner extends Application {
 
@@ -27,6 +27,17 @@ public class AEXBanner extends Application {
     private double textPosition;
     private BannerController controller;
     private AnimationTimer animationTimer;
+    private IStockExchange stockExchange;
+
+//    public AEXBanner(IStockExchange stockExchange) {
+//        this.stockExchange = stockExchange;
+//        //Application.launch();
+//        AEXBanner.launch(AEXBanner.class);
+//    }
+//
+//    public AEXBanner(String[] args) {
+//
+//    }
 
     @Override
     public void start(Stage primaryStage) {

@@ -1,10 +1,10 @@
 package aex.Tasks;
 
-import aex.IStock;
-import aex.Stock;
-import aex.StockExchange.MockStockExchange;
+import aex.Stock.IStock;
+import aex.Stock.Stock;
+import aex.server.StockExchange.MockStockExchange;
 
-import java.text.DecimalFormat;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
@@ -16,7 +16,7 @@ public class GenerateStocks extends TimerTask {
         this.mock = mock;
     }
 
-    public void run (){
+    public void run() {
         // randomly generate stock
         ArrayList<IStock> stocks = new ArrayList<IStock>();
         double min = 0.00;
@@ -31,7 +31,11 @@ public class GenerateStocks extends TimerTask {
         stocks.add(new Stock("ABN AMRO", ThreadLocalRandom.current().nextDouble(min, max)));
         stocks.add(new Stock("Heineken", ThreadLocalRandom.current().nextDouble(min, max)));
         stocks.add(new Stock("KPN", ThreadLocalRandom.current().nextDouble(min, max)));
-        mock.setStock(stocks);
-        System.out.print("Task " + stocks.size() + "\n");
+        try {
+            mock.setStock(stocks);
+            System.out.print("Task " + stocks.size() + "\n");
+        } catch (RemoteException rex) {
+            rex.printStackTrace();
+        }
     }
 }

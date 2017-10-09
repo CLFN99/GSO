@@ -1,6 +1,8 @@
-package aex;
+package aex.Stock;
 
-public class Stock implements IStock {
+import java.io.Serializable;
+
+public class Stock implements IStock, Serializable {
 
     private String name;
     private double rate;
