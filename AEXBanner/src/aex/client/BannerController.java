@@ -1,32 +1,42 @@
 package aex.client;
 
+import aex.Stock.IStock;
+import aex.Stock.Stock;
 import aex.server.StockExchange.IStockExchange;
-import aex.Tasks.UpdateBanner;
 
+import aex.server.StockExchange.MockStockExchange;
+import fontyspublisher.IRemotePropertyListener;
+import fontyspublisher.IRemotePublisherForListener;
+
+import java.beans.PropertyChangeEvent;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Timer;
 
-public class BannerController {
+public class BannerController extends UnicastRemoteObject implements IRemotePropertyListener {
 
     private AEXBanner banner;
-    private Timer pollingTimer;
+   // private Timer pollingTimer;
     private IStockExchange stockExchange;
-
+    private IRemotePublisherForListener publisher;
     // Set binding name for student administration
     private static final String bindingName = "StockExchange";
-
+    private List<IStock> stocks;
     // References to registry and student administration
     private Registry registry = null;
     private IStockExchange tempStockExchange = null;
 
-    public BannerController(AEXBanner banner) {
-        pollingTimer = new Timer();
+    public BannerController(AEXBanner banner) throws RemoteException {
+        stockExchange = new MockStockExchange();
+       // pollingTimer = new Timer();
         this.banner = banner;
-
+        stocks = new ArrayList<IStock>();
         // Welcome message
         System.out.println("CLIENT USING REGISTRY");
 
@@ -42,20 +52,21 @@ public class BannerController {
         // Create client
         createClient(ipAddress, portNumber);
 
+        stockExchange.generateStocks();
 
 
         // Start polling timer: update banner every two seconds
-        pollingTimer.schedule(new UpdateBanner(banner, tempStockExchange), 0, 1000);
-       // List<IStock> stocks = tempStockExchange.getStock();
-       // banner.setStocks(stocks);
+
     }
 
     private void createClient(String ipAddress, int portNumber) {
+
         // Print IP address and port number for registry
         System.out.println("Client: IP Address: " + ipAddress);
         System.out.println("Client: Port number " + portNumber);
 
-        // Locate registry at IP address and port number
+
+        //Locate registry at IP address and port number
         try {
             registry = LocateRegistry.getRegistry(ipAddress, portNumber);
         } catch (RemoteException ex) {
@@ -64,78 +75,21 @@ public class BannerController {
             registry = null;
         }
 
-        // Print result locating registry
-        if (registry != null) {
-            System.out.println("Client: Registry located");
-        } else {
-            System.out.println("Client: Cannot locate registry");
-            System.out.println("Client: Registry is null pointer");
-        }
-
-        // Print contents of registry
-        if (registry != null) {
-            printContentsRegistry();
-        }
-
-        // Bind student administration using registry
-        if (registry != null) {
-            try {
-                tempStockExchange = (IStockExchange) registry.lookup(bindingName);
-            } catch (RemoteException ex) {
-                System.out.println("Client: Cannot bind student administration");
-                System.out.println("Client: RemoteException: " + ex.getMessage());
-                tempStockExchange = null;
-            } catch (NotBoundException ex) {
-                System.out.println("Client: Cannot bind student administration");
-                System.out.println("Client: NotBoundException: " + ex.getMessage());
-                tempStockExchange = null;
-            }
-        }
-
-        // Print result binding student administration
-        if (tempStockExchange != null) {
-            System.out.println("Client: Student administration bound");
-        } else {
-            System.out.println("Client: Student administration is null pointer");
-        }
-
-        // Test RMI connection
-        if (tempStockExchange != null) {
-            ///////////
-            //testStudentAdministration();
-
-            stockExchange = tempStockExchange;
-
+        //init publisher
+        try {
+            publisher = (IRemotePublisherForListener) registry.lookup("stockPublisher");
+            publisher.subscribeRemoteListener(this, "stocks");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (NotBoundException e) {
+            e.printStackTrace();
         }
     }
 
-    // Print contents of registry
-    private void printContentsRegistry() {
-        try {
-            String[] listOfNames = registry.list();
-            System.out.println("Client: list of names bound in registry:");
-            if (listOfNames.length != 0) {
-                for (String s : registry.list()) {
-                    System.out.println(s);
-                }
-            } else {
-                System.out.println("Client: list of names bound in registry is empty");
-            }
-        } catch (RemoteException ex) {
-            System.out.println("Client: Cannot show list of names bound in registry");
-            System.out.println("Client: RemoteException: " + ex.getMessage());
-        }
-    }
 
-    // Stop banner controller
-    public void stop() {
-        // Stop simulation timer
-        pollingTimer.cancel();
-
-        try {
-            tempStockExchange.stopTimer();
-        } catch (RemoteException rex) {
-            System.out.println(rex.getStackTrace());
-        }
+    @Override
+    public void propertyChange(PropertyChangeEvent propertyChangeEvent) throws RemoteException {
+        this.stocks.add((IStock)propertyChangeEvent.getNewValue());
+        banner.setStocks(stocks);
     }
 }

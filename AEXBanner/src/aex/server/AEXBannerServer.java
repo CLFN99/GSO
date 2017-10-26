@@ -60,7 +60,7 @@ public class AEXBannerServer {
             registry = null;
         }
 
-        // Bind student administration using registry
+        // Bind stockexchange using registry
         try {
             registry.rebind(bindingName, stockExchange);
         } catch (RemoteException ex) {

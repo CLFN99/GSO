@@ -1,6 +1,8 @@
 package aex.Stock;
 
-public interface IStock {
+import java.io.Serializable;
+
+public interface IStock  {
     String getName();
     double getRate();
 }

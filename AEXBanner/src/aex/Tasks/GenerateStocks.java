@@ -3,6 +3,7 @@ package aex.Tasks;
 import aex.Stock.IStock;
 import aex.Stock.Stock;
 import aex.server.StockExchange.MockStockExchange;
+import fontyspublisher.RemotePublisher;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -11,8 +12,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GenerateStocks extends TimerTask {
     private MockStockExchange mock;
+    private RemotePublisher publisher;
 
-    public GenerateStocks(MockStockExchange mock){
+    public GenerateStocks(MockStockExchange mock, RemotePublisher publiser){
+        this.publisher = publiser;
         this.mock = mock;
     }
 
@@ -22,7 +25,7 @@ public class GenerateStocks extends TimerTask {
         double min = 0.00;
         double max = 100.00;
 
-        double random = ThreadLocalRandom.current().nextDouble(min, max);
+      //  double random = ThreadLocalRandom.current().nextDouble(min, max);
         stocks.add(new Stock("Unilever", ThreadLocalRandom.current().nextDouble(min, max)));
         stocks.add(new Stock("Shell", ThreadLocalRandom.current().nextDouble(min, max)));
         stocks.add(new Stock("Google", ThreadLocalRandom.current().nextDouble(min, max)));
@@ -32,8 +35,10 @@ public class GenerateStocks extends TimerTask {
         stocks.add(new Stock("Heineken", ThreadLocalRandom.current().nextDouble(min, max)));
         stocks.add(new Stock("KPN", ThreadLocalRandom.current().nextDouble(min, max)));
         try {
-            mock.setStock(stocks);
-            System.out.print("Task " + stocks.size() + "\n");
+            for(IStock stock : stocks){
+                publisher.inform("stocks", null, stock);
+            }
+
         } catch (RemoteException rex) {
             rex.printStackTrace();
         }
