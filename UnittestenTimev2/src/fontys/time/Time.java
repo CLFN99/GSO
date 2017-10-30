@@ -115,6 +115,10 @@ public class Time implements ITime {
     @Override
     public int difference(ITime time) {
         Time t = (Time) time;
-        return (int) (((t.gc.getTimeInMillis() - this.gc.getTimeInMillis() / 1000) / 60 ));
+        double ms = t.gc.getTimeInMillis() - this.gc.getTimeInMillis();
+        double s = ms / 1000;
+        double minutes = s / 60;
+        int result = (int) minutes;
+        return result ;
     }
 }
