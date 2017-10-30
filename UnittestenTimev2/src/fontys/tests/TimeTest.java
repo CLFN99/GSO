@@ -66,8 +66,34 @@ class TimeTest {
     }
     @Test
     void testGetDayInWeek(){
-        Time t = new Time(2017, 10, 2, 4, 45);
-        assertEquals(DayInWeek.THU, t.getDayInWeek());
+
+        //MONDAY
+        Time mon = new Time(2017, 9, 30, 4, 45);
+        assertEquals(DayInWeek.MON, mon.getDayInWeek());
+
+        //TUESDAY
+        Time tue = new Time(2017, 9, 31, 4, 45);
+        assertEquals(DayInWeek.TUE, tue.getDayInWeek());
+
+        //WEDNESDAY
+        Time wed = new Time(2017, 10, 1, 4, 45);
+        assertEquals(DayInWeek.WED, wed.getDayInWeek());
+
+        //THURSDAY
+        Time thur = new Time(2017, 10, 2, 4, 45);
+        assertEquals(DayInWeek.THU, thur.getDayInWeek());
+
+        //FRIDAY
+        Time fri = new Time(2017, 10, 3, 4, 45);
+        assertEquals(DayInWeek.FRI, fri.getDayInWeek());
+
+        //SATURDAY
+        Time sat = new Time(2017, 10, 4, 4, 45);
+        assertEquals(DayInWeek.SAT, sat.getDayInWeek());
+
+        //SUNDAY
+        Time sun = new Time(2017, 10, 5, 4, 45);
+        assertEquals(DayInWeek.SUN, sun.getDayInWeek());
     }
 
     @Test
