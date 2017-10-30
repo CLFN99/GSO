@@ -65,7 +65,7 @@ public class TimeSpan implements ITimeSpan {
     public void setEndTime(ITime endTime) {
         if (endTime.compareTo(bt) <= 0) {
             throw new IllegalArgumentException("end time "
-                    + et + " must be later then begin time " + bt);
+                    + endTime + " must be later then begin time " + bt);
         }
 
         bt = endTime;
@@ -99,16 +99,18 @@ public class TimeSpan implements ITimeSpan {
         }
 
         ITime begintime, endtime;
+
         if (bt.compareTo(timeSpan.getBeginTime()) < 0) {
-            begintime = bt;
-        } else {
             begintime = timeSpan.getBeginTime();
+        } else {
+            begintime = bt;
         }
 
         if (et.compareTo(timeSpan.getEndTime()) > 0) {
-            endtime = et;
-        } else {
             endtime = timeSpan.getEndTime();
+
+        } else {
+            endtime = et;
         }
 
         return new TimeSpan(begintime, endtime);
@@ -152,6 +154,5 @@ public class TimeSpan implements ITimeSpan {
 
         }
         return null;
-
     }
 }
