@@ -4,6 +4,8 @@
  */
 package fontys.time;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 /**
  *
  * @author Frank Peeters, Nico Kuijpers
@@ -121,14 +123,16 @@ public class TimeSpan implements ITimeSpan {
         int compareBegin = timeSpan.getBeginTime().compareTo(this.getBeginTime());
         int compareBeginToEnd = timeSpan.getBeginTime().compareTo(this.getEndTime());
 
-        if(compareBegin == 0 || compareBegin > 0 && compareBeginToEnd < 0 ){
+        Boolean temp = timeSpan.getBeginTime().compareTo(bt) < 0;
+
+        if(compareBegin <= 0 || compareBegin > 0 && compareBeginToEnd < 0 ){
             // the beginTime is the same or the begintime is after begintime this and before endtime this
             //they intersect
             ITime begintime = null, endtime = null;
 
             //determine begintime
             if (timeSpan.getBeginTime().compareTo(bt) < 0 ) {
-                begintime = bt;
+                begintime = bt; //Tested but bugged #intellijbug
             }
             else if (timeSpan.getBeginTime().compareTo(bt) == 0){
                 begintime = bt;
