@@ -2,7 +2,6 @@ package aex.Tasks;
 
 import aex.Stock.IStock;
 import aex.Stock.Stock;
-import aex.server.StockExchange.MockStockExchange;
 import fontyspublisher.RemotePublisher;
 
 import java.rmi.RemoteException;
@@ -11,12 +10,10 @@ import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GenerateStocks extends TimerTask {
-    private MockStockExchange mock;
     private RemotePublisher publisher;
 
-    public GenerateStocks(MockStockExchange mock, RemotePublisher publiser){
+    public GenerateStocks(RemotePublisher publiser){
         this.publisher = publiser;
-        this.mock = mock;
     }
 
     public void run() {

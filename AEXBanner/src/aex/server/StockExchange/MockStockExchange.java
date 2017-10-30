@@ -1,10 +1,7 @@
 package aex.server.StockExchange;
 
 import aex.Stock.IStock;
-import aex.Stock.Stock;
 import aex.Tasks.GenerateStocks;
-import fontyspublisher.IRemotePropertyListener;
-import fontyspublisher.IRemotePublisherForListener;
 import fontyspublisher.RemotePublisher;
 
 import java.rmi.RemoteException;
@@ -14,9 +11,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
-import java.util.concurrent.ThreadLocalRandom;
 
-/** This is the server. Will push/do changes. This is the RemotePublisher
+/** This is the server. Will push/do changes. RemotePublisher
  * must implement IRemotePublisherForListener  **/
 public class MockStockExchange extends UnicastRemoteObject implements aex.server.StockExchange.IStockExchange {
 
@@ -38,7 +34,7 @@ public class MockStockExchange extends UnicastRemoteObject implements aex.server
 
     public void generateStocks() throws RemoteException {
         //randomly generate stock and add it to list every second
-        GenerateStocks generateStocks = new GenerateStocks(this, publisher);
+        GenerateStocks generateStocks = new GenerateStocks(publisher);
         //timer.schedule(generateStocks, 0, 1000);
         if(counter == 1){
             //at start of application

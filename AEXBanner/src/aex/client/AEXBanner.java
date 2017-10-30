@@ -20,7 +20,6 @@ public class AEXBanner extends Application {
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 100;
     public static final int NANO_TICKS = 20000000;
-    // FRAME_RATE = 1000000000/NANO_TICKS = 50;
 
     private List<IStock> stocks;
     private Text text;
@@ -30,15 +29,6 @@ public class AEXBanner extends Application {
     private AnimationTimer animationTimer;
     private IStockExchange stockExchange;
 
-//    public AEXBanner(IStockExchange stockExchange) {
-//        this.stockExchange = stockExchange;
-//        //Application.launch();
-//        AEXBanner.launch(AEXBanner.class);
-//    }
-//
-//    public AEXBanner(String[] args) {
-//
-//    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -83,7 +73,6 @@ public class AEXBanner extends Application {
                         setStock(stockString + " " + stockString);
                     }
 
-                    //System.out.printf("Text width: %s; Text X: %s%n", text.getLayoutBounds().getWidth(), text.getLayoutX());
                     if (-text.getLayoutX() < text.getLayoutBounds().getWidth()) { //Minus text.getLayoutX() to account for the negative x number (when scrolling to the left)
                         text.relocate(text.getLayoutX() - 2, 0);
                     } else {
@@ -113,7 +102,6 @@ public class AEXBanner extends Application {
 
     @Override
     public void stop() {
-        //controller.stop();
         animationTimer.stop();
     }
 }

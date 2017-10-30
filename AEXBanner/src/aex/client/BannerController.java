@@ -1,7 +1,6 @@
 package aex.client;
 
 import aex.Stock.IStock;
-import aex.Stock.Stock;
 import aex.server.StockExchange.IStockExchange;
 
 import aex.server.StockExchange.MockStockExchange;
@@ -17,7 +16,6 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Timer;
 
 public class BannerController extends UnicastRemoteObject implements IRemotePropertyListener {
 
