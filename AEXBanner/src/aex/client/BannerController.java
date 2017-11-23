@@ -24,7 +24,7 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
     //I AM THE CLIENT.
     //
 
-    private Timer timer;
+   // private Timer timer;
     private IRemotePublisherForListener publisherListner;
 
     private AEXBanner banner;
@@ -39,8 +39,8 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
 
     public BannerController(AEXBanner banner) throws RemoteException {
         publisher = new RemotePublisher();
-
-        timer = new Timer();
+        stockExchange = new MockStockExchange((RemotePublisher)publisher);
+       // timer = new Timer();
        // pollingTimer = new Timer();
         this.banner = banner;
         stocks = new ArrayList<IStock>();
@@ -58,13 +58,8 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
 
         // Create client
         createClient(ipAddress, portNumber);
-        // Start polling timer: update banner every two seconds
-        stockExchange = new MockStockExchange(publisher);
 
         stockExchange.generateStocks();
-
-
-        // Start polling timer: update banner every two seconds
 
     }
 
@@ -99,8 +94,8 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
 
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) throws RemoteException {
-        this.stocks.add((IStock)propertyChangeEvent.getNewValue());
+        stocks.clear();
+        this.stocks.addAll((ArrayList<IStock>) propertyChangeEvent.getNewValue());
         banner.setStocks(stocks);
-        System.out.println("SETTING ONE STOCK ON BANNER.");
     }
 }

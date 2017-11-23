@@ -14,11 +14,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GenerateStocks extends TimerTask {
 
-    private MockStockExchange stockExchange;
+   // private MockStockExchange stockExchange;
     private RemotePublisher publisher;
-    public GenerateStocks(RemotePublisher publisher, MockStockExchange stockExchange) {
+    public GenerateStocks(RemotePublisher publisher) {
         this.publisher = publisher;
-        this.stockExchange = stockExchange;
+       // this.stockExchange = stockExchange;
     }
 
     public void run() {
@@ -26,34 +26,21 @@ public class GenerateStocks extends TimerTask {
         ArrayList<IStock> stocks = new ArrayList<IStock>();
         double min = 0.00;
         double max = 100.00;
-
-
-
+        stocks.clear();
         stocks.add(new Stock("Unilever", ThreadLocalRandom.current().nextDouble(min, max)));
         stocks.add(new Stock("Shell", ThreadLocalRandom.current().nextDouble(min, max)));
         stocks.add(new Stock("Google", ThreadLocalRandom.current().nextDouble(min, max)));
         stocks.add(new Stock("Apple", ThreadLocalRandom.current().nextDouble(min, max)));
-        stocks.add(new Stock("Jumbo BV", ThreadLocalRandom.current().nextDouble(min, max)));
-        stocks.add(new Stock("ABN AMRO", ThreadLocalRandom.current().nextDouble(min, max)));
-        stocks.add(new Stock("Heineken", ThreadLocalRandom.current().nextDouble(min, max)));
-        stocks.add(new Stock("KPN", ThreadLocalRandom.current().nextDouble(min, max)));
-        try {
+//        stocks.add(new Stock("Jumbo BV", ThreadLocalRandom.current().nextDouble(min, max)));
+//        stocks.add(new Stock("ABN AMRO", ThreadLocalRandom.current().nextDouble(min, max)));
+//        stocks.add(new Stock("Heineken", ThreadLocalRandom.current().nextDouble(min, max)));
+//        stocks.add(new Stock("KPN", ThreadLocalRandom.current().nextDouble(min, max)));
 
-           //stockExchange.setStock(stocks);
-            for(IStock stock : stocks){
-                publisher.inform("stocks", null, stock);
-            }
+        try {
+            publisher.inform("stocks", null, stocks);
         } catch (RemoteException e) {
             e.printStackTrace();
-
-            for(IStock stock : stocks){
-                try {
-                    publisher.inform("stocks", null, stock);
-                } catch (RemoteException e1) {
-                    e1.printStackTrace();
-                }
-            }
-
         }
+        System.out.println("generating stocks!");
     }
 }

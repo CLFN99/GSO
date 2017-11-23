@@ -94,12 +94,15 @@ public class AEXBanner extends Application {
     }
 
     public void setStocks(List<IStock> stocks){
+     //   stocks.clear();
         this.stocks = stocks;
+        System.out.println("setting stocks list!");
     }
 
     public void setStock(String stock) {
         text.setText(stock + " " );
         textLength = WIDTH;
+        System.out.println("changing stock text!");
     }
 
     @Override
