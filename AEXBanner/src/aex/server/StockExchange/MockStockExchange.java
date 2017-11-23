@@ -24,7 +24,6 @@ public class MockStockExchange extends UnicastRemoteObject implements aex.server
     private RemotePublisher publisher;
     private int counter = 0;
 
-<<<<<<< HEAD
     public MockStockExchange(RemotePublisher publisher) throws RemoteException {
         counter++;
         stocks = new ArrayList<>();
@@ -35,40 +34,32 @@ public class MockStockExchange extends UnicastRemoteObject implements aex.server
         Registry registry = LocateRegistry.createRegistry(1099);
         registry.rebind("stockPublisher", publisher);
         generateStocks();
-=======
->>>>>>> c0ed5bcc5352ee0aee58aef860e99ae125f27199
     }
 
     public void generateStocks() throws RemoteException {
         //randomly generate stock and add it to list every second
-<<<<<<< HEAD
         GenerateStocks generateStocks = new GenerateStocks(this.publisher, this);
         timer.schedule(generateStocks, 0, 1000);
         if(stocks!= null || stocks.size() != 0){
-
-        }
-
-
-=======
-        GenerateStocks generateStocks = new GenerateStocks(publisher);
-        //timer.schedule(generateStocks, 0, 1000);
-        if(counter == 1){
-            //at start of application
-
-            generateStocks.run();
-            counter++;
-        }
-        else {
             timer.schedule(generateStocks, 0, 1000);
         }
->>>>>>> c0ed5bcc5352ee0aee58aef860e99ae125f27199
+
+        //timer.schedule(generateStocks, 0, 1000);
+//        if(counter == 1){
+//            //at start of application
+//
+//            generateStocks.run();
+//            counter++;
+//        }
+//        else {
+//            timer.schedule(generateStocks, 0, 1000);
+//        }
     }
 
     @Override
     public List<IStock> getStock() throws RemoteException {
-<<<<<<< HEAD
        // System.out.print("GET MOCK \n");
->>>>>>> c0ed5bcc5352ee0aee58aef860e99ae125f27199
+        System.out.print("GET MOCK \n");
         return stocks;
     }
 
@@ -81,8 +72,4 @@ public class MockStockExchange extends UnicastRemoteObject implements aex.server
         timer.cancel();
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> c0ed5bcc5352ee0aee58aef860e99ae125f27199
 }

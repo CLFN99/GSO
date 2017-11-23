@@ -32,19 +32,12 @@ public class AEXBanner extends Application {
 
 
     @Override
-<<<<<<< HEAD
-    public void start(Stage primaryStage) throws RemoteException {
+    public void start(Stage primaryStage) {
         try {
             controller = new BannerController(this);
-            //counter++;
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-//        if(counter == 1){
-//            controller.generate();
-//        }
-=======
->>>>>>> c0ed5bcc5352ee0aee58aef860e99ae125f27199
         Font font = new Font("Arial", HEIGHT - 10);
         text = new Text();
         text.setFont(font);
