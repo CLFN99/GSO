@@ -1,13 +1,19 @@
 package aex.client;
 
 import aex.Stock.IStock;
+<<<<<<< HEAD
 import aex.Tasks.GenerateStocks;
+=======
+>>>>>>> c0ed5bcc5352ee0aee58aef860e99ae125f27199
 import aex.server.StockExchange.IStockExchange;
 
 import aex.server.StockExchange.MockStockExchange;
 import fontyspublisher.IRemotePropertyListener;
 import fontyspublisher.IRemotePublisherForListener;
+<<<<<<< HEAD
 import fontyspublisher.RemotePublisher;
+=======
+>>>>>>> c0ed5bcc5352ee0aee58aef860e99ae125f27199
 
 import java.beans.PropertyChangeEvent;
 import java.rmi.NotBoundException;
@@ -21,6 +27,7 @@ import java.util.Scanner;
 import java.util.Timer;
 
 public class BannerController extends UnicastRemoteObject implements IRemotePropertyListener {
+<<<<<<< HEAD
     //
     //I AM THE CLIENT.
     //
@@ -30,6 +37,9 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
     private IStockExchange stockExchange;
     private IRemotePublisherForListener publisherListner;
     private RemotePublisher publisher;
+=======
+
+>>>>>>> c0ed5bcc5352ee0aee58aef860e99ae125f27199
     // Set binding name for student administration
     private static final String bindingName = "StockExchange";
     private List<IStock> stocks;
@@ -37,9 +47,12 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
     private Registry registry = null;
 
     public BannerController(AEXBanner banner) throws RemoteException {
+<<<<<<< HEAD
         publisher = new RemotePublisher();
 
         timer = new Timer();
+=======
+>>>>>>> c0ed5bcc5352ee0aee58aef860e99ae125f27199
         this.banner = banner;
         stocks = new ArrayList<IStock>();
         // Welcome message
@@ -56,8 +69,14 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
 
         // Create client
         createClient(ipAddress, portNumber);
+<<<<<<< HEAD
         // Start polling timer: update banner every two seconds
         stockExchange = new MockStockExchange(publisher);
+=======
+
+
+
+>>>>>>> c0ed5bcc5352ee0aee58aef860e99ae125f27199
 
     }
 
@@ -79,8 +98,11 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
 
         //init publisher
         try {
+<<<<<<< HEAD
             publisherListner = (IRemotePublisherForListener) registry.lookup("stockPublisher");
             publisherListner.subscribeRemoteListener(this, "stocks");
+=======
+>>>>>>> c0ed5bcc5352ee0aee58aef860e99ae125f27199
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
@@ -88,10 +110,17 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
         }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c0ed5bcc5352ee0aee58aef860e99ae125f27199
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) throws RemoteException {
         this.stocks.add((IStock)propertyChangeEvent.getNewValue());
         banner.setStocks(stocks);
+<<<<<<< HEAD
         System.out.println("SETTING ONE STOCK ON BANNER.");
+=======
+>>>>>>> c0ed5bcc5352ee0aee58aef860e99ae125f27199
     }
 }
