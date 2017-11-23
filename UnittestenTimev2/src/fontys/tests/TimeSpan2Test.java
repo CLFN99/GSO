@@ -105,5 +105,104 @@ class TimeSpan2Test {
     }
     @Test
     void intersectionWith() {
+        //**B
+        TimeSpan2 t1 = new TimeSpan2(
+                new Time(2017, 9, 18, 12, 0),
+                new Time(2017, 9, 18, 15, 30));
+        TimeSpan2 t2 = new TimeSpan2(
+                new Time(2017,9,18,13,0),
+                new Time (2017,9,18,16,0)
+        );
+        TimeSpan2 t = (TimeSpan2)t1.intersectionWith(t2);
+        TimeSpan2 intersection = new TimeSpan2(
+                new Time (2017,9,18,13,0),
+                new Time(2017,9,18,15,30)
+        );
+
+        assertEquals(intersection.getBeginTime().getHours(), t.getBeginTime().getHours());
+        assertEquals(intersection.getEndTime().getHours(), t.getEndTime().getHours());
+        assertEquals(intersection.getBeginTime().getMinutes(), t.getBeginTime().getMinutes());
+        assertEquals(intersection.getEndTime().getMinutes(), t.getEndTime().getMinutes());
+        //**
+
+        //**Same start; different end
+        t1 = new TimeSpan2(
+                new Time(2017, 9, 18, 12, 0),
+                new Time(2017, 9, 18, 15, 30));
+        t2 = new TimeSpan2(
+                new Time(2017,9,18,12,0),
+                new Time (2017,9,18,16,0)
+        );
+        t = (TimeSpan2)t1.intersectionWith(t2);
+        intersection = new TimeSpan2(
+                new Time (2017,9,18,12,0),
+                new Time(2017,9,18,15,30)
+        );
+
+        assertEquals(intersection.getBeginTime().getHours(), t.getBeginTime().getHours());
+        assertEquals(intersection.getEndTime().getHours(), t.getEndTime().getHours());
+        assertEquals(intersection.getBeginTime().getMinutes(), t.getBeginTime().getMinutes());
+        assertEquals(intersection.getEndTime().getMinutes(), t.getEndTime().getMinutes());
+        //**
+
+        //**First start earlier than the second start
+        TimeSpan2 t3 = new TimeSpan2(
+                new Time(2017, 9, 18, 13, 0),
+                new Time(2017, 9, 18, 16, 0));
+        TimeSpan2 t4 = new TimeSpan2(
+                new Time(2017,9,18,12,0),
+                new Time (2017,9,18,16,0)
+        );
+        t = (TimeSpan2)t3.intersectionWith(t4);
+        intersection = new TimeSpan2(
+                new Time (2017,9,18,13,0),
+                new Time(2017,9,18,16,0)
+        );
+
+        assertEquals(intersection.getBeginTime().getHours(), t.getBeginTime().getHours());
+        assertEquals(intersection.getEndTime().getHours(), t.getEndTime().getHours());
+        assertEquals(intersection.getBeginTime().getMinutes(), t.getBeginTime().getMinutes());
+        assertEquals(intersection.getEndTime().getMinutes(), t.getEndTime().getMinutes());
+        //**
+
+        //**Ending test 1
+        t3 = new TimeSpan2(
+                new Time(2017, 9, 18, 12, 0),
+                new Time(2017, 9, 18, 15, 30));
+        t4 = new TimeSpan2(
+                new Time(2017,9,18,13,0),
+                new Time (2017,9,18,16,0)
+        );
+        t = (TimeSpan2)t3.intersectionWith(t4);
+        intersection = new TimeSpan2(
+                new Time (2017,9,18,13,0),
+                new Time(2017,9,18,15,30)
+        );
+
+        assertEquals(intersection.getBeginTime().getHours(), t.getBeginTime().getHours());
+        assertEquals(intersection.getEndTime().getHours(), t.getEndTime().getHours());
+        assertEquals(intersection.getBeginTime().getMinutes(), t.getBeginTime().getMinutes());
+        assertEquals(intersection.getEndTime().getMinutes(), t.getEndTime().getMinutes());
+        //**
+
+        //**Ending test 2
+        t3 = new TimeSpan2(
+                new Time(2017, 9, 18, 12, 0),
+                new Time(2017, 9, 18, 16, 30));
+        t4 = new TimeSpan2(
+                new Time(2017,9,18,13,0),
+                new Time (2017,9,18,16,0)
+        );
+        t = (TimeSpan2)t3.intersectionWith(t4);
+        intersection = new TimeSpan2(
+                new Time (2017,9,18,13,0),
+                new Time(2017,9,18,16,0)
+        );
+
+        assertEquals(intersection.getBeginTime().getHours(), t.getBeginTime().getHours());
+        assertEquals(intersection.getEndTime().getHours(), t.getEndTime().getHours());
+        assertEquals(intersection.getBeginTime().getMinutes(), t.getBeginTime().getMinutes());
+        assertEquals(intersection.getEndTime().getMinutes(), t.getEndTime().getMinutes());
+        //**
     }
 }

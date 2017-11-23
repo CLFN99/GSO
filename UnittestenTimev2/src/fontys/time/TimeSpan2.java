@@ -114,6 +114,6 @@ public class TimeSpan2 implements ITimeSpan {
             return null;
         }
 
-        return new TimeSpan(begintime, endtime);
+        return new TimeSpan2(begintime, endtime);
     }
 }

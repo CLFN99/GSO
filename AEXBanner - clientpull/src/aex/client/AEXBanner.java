@@ -11,7 +11,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.rmi.RemoteException;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -20,6 +19,7 @@ public class AEXBanner extends Application {
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 100;
     public static final int NANO_TICKS = 20000000;
+    // FRAME_RATE = 1000000000/NANO_TICKS = 50;
 
     private List<IStock> stocks;
     private Text text;
@@ -28,20 +28,21 @@ public class AEXBanner extends Application {
     private BannerController controller;
     private AnimationTimer animationTimer;
     private IStockExchange stockExchange;
-    private int counter = 0;
 
+//    public AEXBanner(IStockExchange stockExchange) {
+//        this.stockExchange = stockExchange;
+//        //Application.launch();
+//        AEXBanner.launch(AEXBanner.class);
+//    }
+//
+//    public AEXBanner(String[] args) {
+//
+//    }
 
     @Override
-    public void start(Stage primaryStage) throws RemoteException {
-        try {
-            controller = new BannerController(this);
-            //counter++;
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-//        if(counter == 1){
-//            controller.generate();
-//        }
+    public void start(Stage primaryStage) {
+        controller = new BannerController(this);
+
         Font font = new Font("Arial", HEIGHT - 10);
         text = new Text();
         text.setFont(font);
@@ -69,16 +70,15 @@ public class AEXBanner extends Application {
 
                     DecimalFormat df = new DecimalFormat("000.00");
                     String stockString = "";
-                    if(stocks!= null || stocks.size() != 0) {
-                        for (IStock stock : stocks) {
-                            String stock1 = stock.getName() + ": " + df.format(stock.getRate());
-                            stockString = stockString + " " + stock1;
-                        }
+                    for (IStock stock: stocks) {
+                        String stock1 =  stock.getName() + ": " + df.format(stock.getRate());
+                        stockString = stockString + " " + stock1;
                     }
                     for(int i = 0; i < 100; i++){
                         setStock(stockString + " " + stockString);
                     }
 
+                    //System.out.printf("Text width: %s; Text X: %s%n", text.getLayoutBounds().getWidth(), text.getLayoutX());
                     if (-text.getLayoutX() < text.getLayoutBounds().getWidth()) { //Minus text.getLayoutX() to account for the negative x number (when scrolling to the left)
                         text.relocate(text.getLayoutX() - 2, 0);
                     } else {
@@ -108,6 +108,7 @@ public class AEXBanner extends Application {
 
     @Override
     public void stop() {
+        controller.stop();
         animationTimer.stop();
     }
 }
