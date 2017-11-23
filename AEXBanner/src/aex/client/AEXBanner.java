@@ -71,9 +71,7 @@ public class AEXBanner extends Application {
                             stockString = stockString + " " + stock1;
                         }
                     }
-                    for(int i = 0; i < 100; i++){
-                        setStock(stockString + " " + stockString);
-                    }
+                    setStock(stockString + " " + stockString);
 
                     if (-text.getLayoutX() < text.getLayoutBounds().getWidth()) { //Minus text.getLayoutX() to account for the negative x number (when scrolling to the left)
                         text.relocate(text.getLayoutX() - 2, 0);

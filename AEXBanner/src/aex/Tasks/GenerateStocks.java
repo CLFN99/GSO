@@ -31,10 +31,10 @@ public class GenerateStocks extends TimerTask {
         stocks.add(new Stock("Shell", ThreadLocalRandom.current().nextDouble(min, max)));
         stocks.add(new Stock("Google", ThreadLocalRandom.current().nextDouble(min, max)));
         stocks.add(new Stock("Apple", ThreadLocalRandom.current().nextDouble(min, max)));
-//        stocks.add(new Stock("Jumbo BV", ThreadLocalRandom.current().nextDouble(min, max)));
-//        stocks.add(new Stock("ABN AMRO", ThreadLocalRandom.current().nextDouble(min, max)));
-//        stocks.add(new Stock("Heineken", ThreadLocalRandom.current().nextDouble(min, max)));
-//        stocks.add(new Stock("KPN", ThreadLocalRandom.current().nextDouble(min, max)));
+        stocks.add(new Stock("Jumbo BV", ThreadLocalRandom.current().nextDouble(min, max)));
+        stocks.add(new Stock("ABN AMRO", ThreadLocalRandom.current().nextDouble(min, max)));
+        stocks.add(new Stock("Heineken", ThreadLocalRandom.current().nextDouble(min, max)));
+        stocks.add(new Stock("KPN", ThreadLocalRandom.current().nextDouble(min, max)));
 
         try {
             publisher.inform("stocks", null, stocks);
