@@ -38,8 +38,8 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
     private Registry registry = null;
 
     public BannerController(AEXBanner banner) throws RemoteException {
-        publisher = new RemotePublisher();
-        stockExchange = new MockStockExchange((RemotePublisher)publisher);
+
+        //stockExchange = new MockStockExchange((RemotePublisher)publisher);
        // timer = new Timer();
        // pollingTimer = new Timer();
         this.banner = banner;
@@ -59,7 +59,7 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
         // Create client
         createClient(ipAddress, portNumber);
 
-        stockExchange.generateStocks();
+        //stockExchange.generateStocks();
 
     }
 

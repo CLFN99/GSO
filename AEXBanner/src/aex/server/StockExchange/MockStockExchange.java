@@ -35,6 +35,8 @@ public class MockStockExchange extends UnicastRemoteObject implements aex.server
         publisher.registerProperty("stocks");
         Registry registry = LocateRegistry.createRegistry(1099);
         registry.rebind("stockPublisher", publisher);
+        System.out.println("Server active");
+        generateStocks();
     }
 
     public void generateStocks() throws RemoteException {

@@ -63,6 +63,21 @@ public class AEXBanner extends Application {
                 if (lag >= NANO_TICKS) {
                     // calculate new location of text
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     DecimalFormat df = new DecimalFormat("000.00");
                     String stockString = "";
                     if(stocks!= null || stocks.size() != 0) {

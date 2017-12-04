@@ -41,6 +41,5 @@ public class GenerateStocks extends TimerTask {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        System.out.println("generating stocks!");
     }
 }
